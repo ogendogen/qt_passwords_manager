@@ -23,16 +23,21 @@ void TableManager::init(QTableWidget *table)
     initialized = true;
 }
 
-void TableManager::addRow()
+void TableManager::appendRow()
 {
     if (!initialized) return;
     table->insertRow(table->rowCount());
     prepareRow(table->rowCount()-1);
 }
 
-void TableManager::deleteRow()
+void TableManager::deleteRow(int row)
 {
-    if (!initialized) return;
+    table->removeRow(row);
+}
+
+void TableManager::deleteLastRow()
+{
+    if (!initialized || table->rowCount() == 1) return;
     table->removeRow(table->rowCount()-1);
 }
 

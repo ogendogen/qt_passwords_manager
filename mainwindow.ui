@@ -207,7 +207,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Usuń ostatnią pozycję</string>
+     <string>Usuń ostatni wiersz</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_4">
@@ -256,6 +256,19 @@
      <bool>true</bool>
     </property>
    </widget>
+   <widget class="QPushButton" name="pushButton_6">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>260</y>
+      <width>131</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Usuń zaznaczony wiersz</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -280,6 +293,7 @@
      <string>Pomoc</string>
     </property>
     <addaction name="actionGenerator_hase"/>
+    <addaction name="actionGenerator_hase_2"/>
    </widget>
    <addaction name="menuBaza_hase"/>
    <addaction name="menuPomoc"/>
@@ -316,6 +330,11 @@
   <action name="actionGenerator_hase">
    <property name="text">
     <string>O Autorze</string>
+   </property>
+  </action>
+  <action name="actionGenerator_hase_2">
+   <property name="text">
+    <string>Generator haseł</string>
    </property>
   </action>
  </widget>

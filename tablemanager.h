@@ -12,8 +12,9 @@ class TableManager : public QObject
     public:
         TableManager();
         void init(QTableWidget *table);
-        void addRow();
-        void deleteRow();
+        void appendRow();
+        void deleteLastRow();
+        void deleteRow(int row);
         void moveRowUp(int row);
         void moveRowDown(int row);
         bool isRow(QList<QTableWidgetItem*>);
