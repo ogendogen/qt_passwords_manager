@@ -26,12 +26,15 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    tablemanager.cpp
+    tablemanager.cpp \
+    generatorwindow.cpp
 
 HEADERS  += mainwindow.h \
-    tablemanager.h
+    tablemanager.h \
+    generatorwindow.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    generatorwindow.ui
 
 DISTFILES +=
 

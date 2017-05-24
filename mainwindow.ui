@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>785</width>
+    <width>589</width>
     <height>337</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Menadżer haseł</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QTableWidget" name="tableWidget">
@@ -61,140 +61,17 @@
      </property>
     </column>
    </widget>
-   <widget class="QCheckBox" name="checkBox">
-    <property name="geometry">
-     <rect>
-      <x>650</x>
-      <y>10</y>
-      <width>81</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Ukryj hasła</string>
-    </property>
-    <property name="checked">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>650</x>
-      <y>30</y>
-      <width>91</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Generator haseł:</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton">
-    <property name="geometry">
-     <rect>
-      <x>650</x>
-      <y>190</y>
-      <width>91</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Generuj hasło</string>
-    </property>
-   </widget>
-   <widget class="QCheckBox" name="checkBox_2">
-    <property name="geometry">
-     <rect>
-      <x>650</x>
-      <y>50</y>
-      <width>70</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Małe litery</string>
-    </property>
-    <property name="checked">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QCheckBox" name="checkBox_3">
-    <property name="geometry">
-     <rect>
-      <x>650</x>
-      <y>80</y>
-      <width>70</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Duże litery</string>
-    </property>
-   </widget>
-   <widget class="QCheckBox" name="checkBox_4">
-    <property name="geometry">
-     <rect>
-      <x>650</x>
-      <y>140</y>
-      <width>101</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Znaki specjalne</string>
-    </property>
-   </widget>
-   <widget class="QCheckBox" name="checkBox_5">
-    <property name="geometry">
-     <rect>
-      <x>650</x>
-      <y>110</y>
-      <width>70</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Cyfry</string>
-    </property>
-    <property name="checked">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QCheckBox" name="checkBox_6">
-    <property name="geometry">
-     <rect>
-      <x>650</x>
-      <y>170</y>
-      <width>111</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Kopiuj do schowka</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="pushButton_2">
     <property name="geometry">
      <rect>
       <x>10</x>
       <y>260</y>
-      <width>75</width>
+      <width>81</width>
       <height>23</height>
      </rect>
     </property>
     <property name="text">
      <string>Nowa pozycja</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="lineEdit">
-    <property name="geometry">
-     <rect>
-      <x>640</x>
-      <y>220</y>
-      <width>121</width>
-      <height>20</height>
-     </rect>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_3">
@@ -261,12 +138,25 @@
      <rect>
       <x>230</x>
       <y>260</y>
-      <width>131</width>
+      <width>141</width>
       <height>23</height>
      </rect>
     </property>
     <property name="text">
      <string>Usuń zaznaczony wiersz</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>380</x>
+      <y>260</y>
+      <width>111</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Ukryj hasła</string>
     </property>
    </widget>
   </widget>
@@ -275,7 +165,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>785</width>
+     <width>589</width>
      <height>21</height>
     </rect>
    </property>

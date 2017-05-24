@@ -8,7 +8,6 @@ TableManager::TableManager()
 void TableManager::init(QTableWidget *table)
 {
     this->table = table;
-    connect(table, SIGNAL(cellClicked(int,int)), this, SLOT(cellClicked(int,int)));
 
     table->verticalHeader()->setStretchLastSection(true);
     table->horizontalHeader()->setStretchLastSection(true);
@@ -77,14 +76,8 @@ bool TableManager::isRow(QList<QTableWidgetItem *> items)
 
     for (int i=1; i<items.count(); i++)
         if (items[i]->row() != row) return false;
-    return true;
-}
 
-void TableManager::cellClicked(int row, int column)
-{
-    if (column != 1) return;
-    last_clicked = row;
-    qDebug() << QString::number(last_clicked);
+    return true;
 }
 
 void TableManager::prepareRow(int row)

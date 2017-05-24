@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QDebug>
 #include <QMessageBox>
+#include "generatorwindow.h"
 #include "tablemanager.h"
 
 namespace Ui {
@@ -19,8 +20,6 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_pushButton_clicked();
-
     void on_pushButton_2_clicked();
 
     void on_pushButton_3_clicked();
@@ -39,9 +38,15 @@ private slots:
 
     void on_pushButton_6_clicked();
 
+    void on_actionGenerator_hase_2_triggered();
+
+    void on_pushButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     TableManager manager;
+    GeneratorWindow *generator = new GeneratorWindow(this);
+    bool passwords_hidden = false;
 };
 
 #endif // MAINWINDOW_H

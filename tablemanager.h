@@ -19,9 +19,6 @@ class TableManager : public QObject
         void moveRowDown(int row);
         bool isRow(QList<QTableWidgetItem*>);
 
-    public slots:
-        void cellClicked(int, int);
-
     private:
         QTableWidget *table;
         bool initialized = false;

@@ -11,15 +11,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
+    if (generator->isActiveWindow()) generator->close();
+    delete generator;
     delete ui;
-}
-
-void MainWindow::on_pushButton_clicked()
-{
-    // generator haseł
-    QString a = "";
-    if (ui->tableWidget->item(1,1)->isSelected()) a = "true"; else a = "false";
-    qDebug() << a;
 }
 
 void MainWindow::on_pushButton_2_clicked()
@@ -96,4 +90,44 @@ void MainWindow::on_pushButton_6_clicked()
         return;
     }
     manager.deleteRow(items[0]->row());
+}
+
+void MainWindow::on_actionGenerator_hase_2_triggered()
+{
+    generator->open();
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    // ukrywanie i odkrywanie haseł
+    if (passwords_hidden)
+    {
+        for (int i=0; i<ui->tableWidget->rowCount(); i++)
+        {
+            if (ui->tableWidget->item(i, 1)->text() != "")
+            {
+                QString buffer = ui->tableWidget->item(i, 1)->data(3).toString();
+                qDebug() << buffer;
+                ui->tableWidget->item(i, 1)->setText(buffer);
+                ui->tableWidget->item(i, 1)->setFlags(Qt::ItemIsEnabled | Qt::ItemIsEditable | Qt::ItemIsSelectable);
+                ui->pushButton->setText("Ukryj hasła");
+            }
+        }
+        passwords_hidden = false;
+    }
+    else
+    {
+        for (int i=0; i<ui->tableWidget->rowCount(); i++)
+        {
+            if (ui->tableWidget->item(i, 1)->text() != "")
+            {
+                QString password = ui->tableWidget->item(i, 1)->text();
+                ui->tableWidget->item(i, 1)->setData(3, password);
+                ui->tableWidget->item(i, 1)->setText("***");
+                ui->tableWidget->item(i, 1)->setFlags(0);
+                ui->pushButton->setText("Pokaż hasła");
+            }
+        }
+        passwords_hidden = true;
+    }
 }
