@@ -27,11 +27,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += main.cpp\
         mainwindow.cpp \
     tablemanager.cpp \
-    generatorwindow.cpp
+    generatorwindow.cpp \
+    passwordgenerator.cpp
 
 HEADERS  += mainwindow.h \
     tablemanager.h \
-    generatorwindow.h
+    generatorwindow.h \
+    passwordgenerator.h
 
 FORMS    += mainwindow.ui \
     generatorwindow.ui

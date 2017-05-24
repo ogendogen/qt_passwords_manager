@@ -4,6 +4,8 @@
 #include <QDialog>
 #include <QString>
 #include <QDebug>
+#include <QClipboard>
+#include "passwordgenerator.h"
 
 namespace Ui {
 class GeneratorWindow;
@@ -22,8 +24,18 @@ private slots:
 
     void on_clipboard_button_clicked();
 
+    void on_checkBox_4_clicked();
+
+    void on_checkBox_3_clicked();
+
+    void on_checkBox_2_clicked();
+
+    void on_checkBox_clicked();
+
 private:
     Ui::GeneratorWindow *ui;
+    int isMinimumRequirementsMet();
+    PasswordGenerator generator;
 };
 
 #endif // GENERATORWINDOW_H
