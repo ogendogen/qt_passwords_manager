@@ -36,6 +36,45 @@ void TableManager::deleteRow()
     table->removeRow(table->rowCount()-1);
 }
 
+void TableManager::moveRowDown(int row)
+{
+    if (row == table->rowCount()-1) return;
+    QStringList row1;
+
+    for (int i=0; i<table->columnCount(); i++) row1 << table->item(row, i)->text();
+    table->removeRow(row);
+
+    table->insertRow(++row);
+    for (int i=0; i<table->columnCount(); i++) table->setItem(row, i, new QTableWidgetItem(row1[i]));
+
+    table->selectRow(row);
+}
+
+void TableManager::moveRowUp(int row)
+{
+    if (row == 0) return;
+    QStringList row1;
+
+    for (int i=0; i<table->columnCount(); i++) row1 << table->item(row, i)->text();
+    table->removeRow(row);
+
+    table->insertRow(--row);
+    for (int i=0; i<table->columnCount(); i++) table->setItem(row, i, new QTableWidgetItem(row1[i]));
+
+    table->selectRow(row);
+}
+
+bool TableManager::isRow(QList<QTableWidgetItem *> items)
+{
+    if (items.isEmpty() || items.count() % table->columnCount() != 0) return false;
+    int row = items[0]->row();
+    if (row == -1) return false;
+
+    for (int i=1; i<items.count(); i++)
+        if (items[i]->row() != row) return false;
+    return true;
+}
+
 void TableManager::cellClicked(int row, int column)
 {
     if (column != 1) return;

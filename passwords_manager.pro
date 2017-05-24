@@ -32,3 +32,7 @@ HEADERS  += mainwindow.h \
     tablemanager.h
 
 FORMS    += mainwindow.ui
+
+DISTFILES +=
+
+RESOURCES +=

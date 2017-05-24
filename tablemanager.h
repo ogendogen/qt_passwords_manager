@@ -14,6 +14,9 @@ class TableManager : public QObject
         void init(QTableWidget *table);
         void addRow();
         void deleteRow();
+        void moveRowUp(int row);
+        void moveRowDown(int row);
+        bool isRow(QList<QTableWidgetItem*>);
 
     public slots:
         void cellClicked(int, int);
