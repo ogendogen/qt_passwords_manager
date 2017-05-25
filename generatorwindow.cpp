@@ -16,11 +16,10 @@ GeneratorWindow::~GeneratorWindow()
 void GeneratorWindow::on_generation_button_clicked()
 {
     int min_len = -1, max_len = -1;
-    if (ui->radioButton->isChecked()) {min_len = 4; max_len = 6;}
-    else if (ui->radioButton_2->isChecked()) {min_len = 7; max_len = 8;}
-    else if (ui->radioButton_3->isChecked()) {min_len = 10; max_len = 13;}
-    else if (ui->radioButton_4->isChecked()) {min_len = 14; max_len = 18;}
-    else if (ui->radioButton_5->isChecked()) {min_len = 18; max_len = 32;}
+    if (ui->radioButton->isChecked()) {min_len = 6; max_len = 9;}
+    else if (ui->radioButton_2->isChecked()) {min_len = 10; max_len = 14;}
+    else if (ui->radioButton_4->isChecked()) {min_len = 15; max_len = 20;}
+    else if (ui->radioButton_5->isChecked()) {min_len = 21; max_len = 32;}
     generator.setRequirements(ui->checkBox_4->isChecked(), ui->checkBox_3->isChecked(), ui->checkBox_2->isChecked(), ui->checkBox->isChecked(), min_len, max_len);
     ui->lineEdit->setText(generator.generate());
 }
@@ -30,7 +29,6 @@ void GeneratorWindow::on_clipboard_button_clicked()
     if (ui->lineEdit->text().isEmpty()) return;
     QClipboard *clipboard = QGuiApplication::clipboard(); // jedyny wskaźnik na systemowy schowek, nie usuwać!
     clipboard->setText(ui->lineEdit->text());
-    qDebug() << "kopiuje do schowka...";
 }
 
 int GeneratorWindow::isMinimumRequirementsMet()

@@ -21,26 +21,30 @@ QString PasswordGenerator::generate()
     QString output = "";
     while(1)
     {
+        output = "";
         for (int i=0; i<len; i++)
         {
             int type = qrand() % 4;
+            while ((!small_letters && type == 0) || (!big_letters && type == 1) || (!digits && type == 2) || (!special_chars && type == 3)) type = qrand() % 4;
+
             switch(type)
             {
                 case 0:
-                    output.append(randomNumFromRange((int)'a', (int)'z'));
+                    output.append(randomNumFromRange(97, 122));
                     break;
                 case 1:
-                    output.append(randomNumFromRange((int)'A', (int)'Z'));
+                    output.append(randomNumFromRange(65, 90));
                     break;
                 case 2:
-                    output.append(randomNumFromRange((int)'0', (int)'9'));
+                    output.append(randomNumFromRange(48, 57));
                     break;
                 case 3:
-                    output.append(randomNumFromRange(50, 150));
+                    QChar ret = QChar((char)randomNumFromRange(33, 126));
+                    while (ret.isLetterOrNumber()) ret = QChar((char)randomNumFromRange(33, 126));
+                    output.append(ret);
                     break;
             }
         }
-
         if (isPasswordMeetRequirements(output)) break;
     }
     return output;
@@ -55,12 +59,13 @@ bool PasswordGenerator::isPasswordMeetRequirements(QString password)
 {
     if (password.length() < min_chars || password.length() > max_chars) return false;
     bool tester;
+
     if (small_letters)
     {
         tester = false;
         for (int i=0; i<password.count(); i++)
         {
-            if (password[i] >= 'a' && password[i] <= 'z')
+            if (password[i].isLower())
             {
                 tester = true;
                 break;
@@ -68,13 +73,12 @@ bool PasswordGenerator::isPasswordMeetRequirements(QString password)
         }
         if (!tester) return false;
     }
-    // && !password.contains(new QRegularExpression("[A-Z]+"))) return false;
     if (big_letters)
     {
         tester = false;
         for (int i=0; i<password.count(); i++)
         {
-            if (password[i] >= 'A' && password[i] <= 'Z')
+            if (password[i].isUpper())
             {
                 tester = true;
                 break;
@@ -87,7 +91,7 @@ bool PasswordGenerator::isPasswordMeetRequirements(QString password)
         tester = false;
         for (int i=0; i<password.count(); i++)
         {
-            if (password[i] >= '0' && password[i] <= '9')
+            if (password[i].isDigit())
             {
                 tester = true;
                 break;
@@ -100,8 +104,9 @@ bool PasswordGenerator::isPasswordMeetRequirements(QString password)
         tester = false;
         for (int i=0; i<password.count(); i++)
         {
-            if (password[i] < 'A' && password[i] > '9')
+            if (!password[i].isLetterOrNumber())
             {
+                qDebug() << password[i];
                 tester = true;
                 break;
             }

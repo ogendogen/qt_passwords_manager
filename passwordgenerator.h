@@ -2,7 +2,8 @@
 #define PASSWORDGENERATOR_H
 
 #include <QString>
-#include <QRegularExpression>
+#include <QRegExp>
+#include <QDebug>
 
 class PasswordGenerator
 {
@@ -18,6 +19,7 @@ class PasswordGenerator
         bool special_chars = false;
         int min_chars = 8;
         int max_chars = 10;
+        //static QString special_chars_collection = " !";
         int randomNumFromRange(int min, int max);
         bool isPasswordMeetRequirements(QString password);
 };
