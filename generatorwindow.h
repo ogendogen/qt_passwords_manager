@@ -5,6 +5,7 @@
 #include <QString>
 #include <QDebug>
 #include <QClipboard>
+#include <QMessageBox>
 #include "passwordgenerator.h"
 
 namespace Ui {

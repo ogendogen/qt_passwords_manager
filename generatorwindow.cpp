@@ -29,6 +29,7 @@ void GeneratorWindow::on_clipboard_button_clicked()
     if (ui->lineEdit->text().isEmpty()) return;
     QClipboard *clipboard = QGuiApplication::clipboard(); // jedyny wskaźnik na systemowy schowek, nie usuwać!
     clipboard->setText(ui->lineEdit->text());
+    QMessageBox::information(this, "Informacja", "Hasło skopiowane!");
 }
 
 int GeneratorWindow::isMinimumRequirementsMet()

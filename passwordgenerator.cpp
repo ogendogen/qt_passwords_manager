@@ -30,17 +30,17 @@ QString PasswordGenerator::generate()
             switch(type)
             {
                 case 0:
-                    output.append(randomNumFromRange(97, 122));
+                    output.append(randomNumFromRange((int)'a', (int)'z'));
                     break;
                 case 1:
-                    output.append(randomNumFromRange(65, 90));
+                    output.append(randomNumFromRange((int)'A', (int)'Z'));
                     break;
                 case 2:
-                    output.append(randomNumFromRange(48, 57));
+                    output.append(randomNumFromRange((int)'0', (int)'9'));
                     break;
                 case 3:
-                    QChar ret = QChar((char)randomNumFromRange(33, 126));
-                    while (ret.isLetterOrNumber()) ret = QChar((char)randomNumFromRange(33, 126));
+                    QChar ret = QChar((char)randomNumFromRange((int)'!', (int)'~'));
+                    while (ret.isLetterOrNumber()) ret = QChar((char)randomNumFromRange((int)'!', (int)'~'));
                     output.append(ret);
                     break;
             }
@@ -106,7 +106,6 @@ bool PasswordGenerator::isPasswordMeetRequirements(QString password)
         {
             if (!password[i].isLetterOrNumber())
             {
-                qDebug() << password[i];
                 tester = true;
                 break;
             }

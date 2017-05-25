@@ -94,7 +94,7 @@ void MainWindow::on_pushButton_6_clicked()
 
 void MainWindow::on_actionGenerator_hase_2_triggered()
 {
-    generator->open();
+    generator->show();
 }
 
 void MainWindow::on_pushButton_clicked()
