@@ -6,6 +6,7 @@
 #include <QMessageBox>
 #include "generatorwindow.h"
 #include "tablemanager.h"
+#include "filemanager.h"
 
 namespace Ui {
 class MainWindow;

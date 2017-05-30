@@ -7,6 +7,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     manager.init(ui->tableWidget);
+
+    FileManager manager("test.json");
 }
 
 MainWindow::~MainWindow()
