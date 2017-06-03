@@ -54,6 +54,10 @@ private slots:
 
     void on_actionZapisz_triggered();
 
+protected:
+    void keyReleaseEvent(QKeyEvent *event);
+
+
 private:
     Ui::MainWindow *ui;
     TableManager manager;

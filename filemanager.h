@@ -16,7 +16,7 @@ class FileManager
     public:
         FileManager();
         ~FileManager();
-        FileManager(QString file_name);
+        FileManager(QString file_name, bool truncate=false);
         bool saveRow(QList<QString> row);
         QList<QTableWidgetItem*> readAllRows();
         void saveToFile();

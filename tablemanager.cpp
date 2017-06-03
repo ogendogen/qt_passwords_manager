@@ -105,7 +105,16 @@ void TableManager::operator <<(const QString text)
     write_cursor++;
 }
 
-void TableManager::operator >>(QString text)
+QList<QString> TableManager::getRow(int row)
+{
+    QList<QString> list;
+    list << (table->item(row, 0) != nullptr ? table->item(row, 0)->text() : "");
+    list << (table->item(row, 1) != nullptr ? table->item(row, 1)->text() : "");
+    list << (table->item(row, 2) != nullptr ? table->item(row, 2)->text() : "");
+    return list;
+}
+
+/*void TableManager::operator >>(QString &text)
 {
     int row = read_cursor / 3;
     if (read_cursor % 3 == 0) row--;
@@ -123,4 +132,5 @@ void TableManager::operator >>(QString text)
         return;
     }
     text = item->text();
-}
+    read_cursor++;
+}*/

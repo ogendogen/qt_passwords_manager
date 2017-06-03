@@ -7,16 +7,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     manager.init(ui->tableWidget);
-
-    try
-    {
-        FileManager file_manager("testtttttt.json");
-    }
-    catch(std::invalid_argument &e)
-    {
-        qDebug() << e.what();
-    }
-
+    ui->tableWidget->resizeRowsToContents();
 }
 
 MainWindow::~MainWindow()
@@ -30,6 +21,7 @@ void MainWindow::on_pushButton_2_clicked()
 {
     // dodanie nowej opcji
     manager.appendRow();
+    ui->tableWidget->resizeRowsToContents();
 }
 
 void MainWindow::on_pushButton_3_clicked()
@@ -40,9 +32,22 @@ void MainWindow::on_pushButton_3_clicked()
         QMessageBox::critical(this, "Uwaga!", "Nie możesz usunąć ostatniego wiersza!");
         return;
     }
-    int result = QMessageBox::warning(this, "Uwaga!", "Zamierzasz usunąć bezpowrotnie ostatni wpis! Czy chcesz kontynuować ?", QMessageBox::Yes | QMessageBox::No);
-    if (result == QMessageBox::No) return;
+
+    int last_row = ui->tableWidget->rowCount()-1;
+    bool is_warn = false;
+
+    if (ui->tableWidget->item(last_row, 0) != nullptr && ui->tableWidget->item(last_row, 0)->text() != "") is_warn = true;
+    else if (ui->tableWidget->item(last_row, 1) != nullptr && ui->tableWidget->item(last_row, 1)->text() != "") is_warn = true;
+    else if (ui->tableWidget->item(last_row, 2) != nullptr && ui->tableWidget->item(last_row, 2)->text() != "") is_warn = true;
+
+    if (is_warn)
+    {
+        int result = QMessageBox::warning(this, "Uwaga!", "Zamierzasz usunąć bezpowrotnie ostatni wpis! Czy chcesz kontynuować ?", QMessageBox::Yes | QMessageBox::No);
+        if (result == QMessageBox::No) return;
+    }
+
     manager.deleteLastRow();
+    ui->tableWidget->resizeRowsToContents();
 }
 
 void MainWindow::on_pushButton_4_clicked()
@@ -100,6 +105,7 @@ void MainWindow::on_pushButton_6_clicked()
         return;
     }
     manager.deleteRow(items[0]->row());
+    ui->tableWidget->resizeRowsToContents();
 }
 
 void MainWindow::on_actionGenerator_hase_2_triggered()
@@ -147,6 +153,7 @@ void MainWindow::on_actionNowy_triggered()
     int result = QMessageBox::warning(this, "Uwaga!", "Utworzenie nowego projektu zniszczy całą dotychczasową pracę! Czy kontynuować ?", QMessageBox::Yes | QMessageBox::No);
     while (result != QMessageBox::Yes && result != QMessageBox::No) result = QMessageBox::warning(this, "Uwaga!", "Utworzenie nowego projektu zniszczy całą dotychczasową pracę! Czy kontynuować ?", QMessageBox::Yes | QMessageBox::No);
     if (result == QMessageBox::No) return;
+    ui->tableWidget->setRowCount(10);
     ui->tableWidget->clearContents();
 }
 
@@ -175,9 +182,13 @@ void MainWindow::on_actionWczytaj_triggered()
 
     QList<QTableWidgetItem*> rows = file_manager.readAllRows();
     ui->tableWidget->clearContents();
+    //while (ui->tableWidget->rowCount() > rows.count() / 3) ui->tableWidget->removeRow(ui->tableWidget->rowCount()-1);
+    ui->tableWidget->setRowCount(rows.count()/3);
 
     manager.resetCursor();
     for (auto row : rows) manager << row->text();
+
+    ui->tableWidget->resizeRowsToContents();
 }
 
 void MainWindow::on_actionZapisz_triggered()
@@ -190,20 +201,23 @@ void MainWindow::on_actionZapisz_triggered()
 
     FileManager file_manager(filename);
     QList<QString> row;
-    int size = ui->tableWidget->rowCount() * ui->tableWidget->columnCount();
-    for (int i=1; i<=size; i++)
+    for (int i=0; i<ui->tableWidget->rowCount(); i++)
     {
-        QString content;
-        manager >> content;
-        if (content.isEmpty()) break;
-
-        row << content;
-        if (row.count() == 3)
-        {
-            file_manager.saveRow(row);
-            row.clear();
-        }
+        row = manager.getRow(i);
+        if (row.isEmpty()) continue;
+        file_manager.saveRow(row);
+        row.clear();
     }
+    file_manager.saveToFile();
+}
 
-    //file_manager.saveToFile();
+void MainWindow::keyReleaseEvent(QKeyEvent *event)
+{
+    if (event->key() == Qt::Key_Delete)
+    {
+        qDebug() << "ok";
+        QList<QTableWidgetItem*> selected_items = ui->tableWidget->selectedItems();
+        if (selected_items.isEmpty()) return;
+        for (auto &&item : selected_items) item->setText("");
+    }
 }
