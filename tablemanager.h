@@ -20,7 +20,6 @@ class TableManager : public QObject
         bool isRow(QList<QTableWidgetItem*>);
         void resetCursor();
         void operator << (const QString text);
-        //void operator >> (QString &text);
         QList<QString> getRow(int row);
 
     private:

@@ -9,7 +9,6 @@ void TableManager::init(QTableWidget *table)
 {
     this->table = table;
 
-    table->verticalHeader()->setStretchLastSection(true);
     table->horizontalHeader()->setStretchLastSection(true);
     for (int i=0; i<table->rowCount(); i++)
     {
@@ -53,6 +52,7 @@ void TableManager::moveRowDown(int row)
     for (int i=0; i<table->columnCount(); i++) table->setItem(row, i, new QTableWidgetItem(row1[i]));
 
     table->selectRow(row);
+    table->resizeRowsToContents();
 }
 
 void TableManager::moveRowUp(int row)
@@ -67,6 +67,7 @@ void TableManager::moveRowUp(int row)
     for (int i=0; i<table->columnCount(); i++) table->setItem(row, i, new QTableWidgetItem(row1[i]));
 
     table->selectRow(row);
+    table->resizeRowsToContents();
 }
 
 bool TableManager::isRow(QList<QTableWidgetItem *> items)
@@ -114,24 +115,3 @@ QList<QString> TableManager::getRow(int row)
     list << (table->item(row, 2) != nullptr ? table->item(row, 2)->text() : "");
     return list;
 }
-
-/*void TableManager::operator >>(QString &text)
-{
-    int row = read_cursor / 3;
-    if (read_cursor % 3 == 0) row--;
-
-    int column = read_cursor % 3;
-    column--;
-    if (column < 0) column = 2;
-
-    QTableWidgetItem *item = table->item(row, column);
-    qDebug() << item->text();
-    if (item == nullptr)
-    {
-        read_cursor = 1;
-        text = "";
-        return;
-    }
-    text = item->text();
-    read_cursor++;
-}*/

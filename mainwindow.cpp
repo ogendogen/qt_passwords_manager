@@ -7,14 +7,6 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     manager.init(ui->tableWidget);
-
-    /*QString content = "abc";
-    QString key = "123";
-
-    QByteArray encoded = coder.encode(content.toUtf8(), key);
-    qDebug() << encoded;
-    QByteArray decoded = coder.decode(encoded, key);
-    qDebug() << decoded;*/
 }
 
 MainWindow::~MainWindow()
@@ -236,7 +228,6 @@ void MainWindow::keyReleaseEvent(QKeyEvent *event)
 {
     if (event->key() == Qt::Key_Delete)
     {
-        qDebug() << "ok";
         QList<QTableWidgetItem*> selected_items = ui->tableWidget->selectedItems();
         if (selected_items.isEmpty()) return;
         for (auto &&item : selected_items) item->setText("");
