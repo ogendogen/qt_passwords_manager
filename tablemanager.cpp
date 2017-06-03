@@ -19,6 +19,7 @@ void TableManager::init(QTableWidget *table)
         }
     }
 
+    table->resizeRowsToContents();
     initialized = true;
 }
 

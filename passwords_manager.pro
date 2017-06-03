@@ -29,13 +29,15 @@ SOURCES += main.cpp\
     tablemanager.cpp \
     generatorwindow.cpp \
     passwordgenerator.cpp \
-    filemanager.cpp
+    filemanager.cpp \
+    coder.cpp
 
 HEADERS  += mainwindow.h \
     tablemanager.h \
     generatorwindow.h \
     passwordgenerator.h \
-    filemanager.h
+    filemanager.h \
+    coder.h
 
 FORMS    += mainwindow.ui \
     generatorwindow.ui

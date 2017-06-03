@@ -7,7 +7,14 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     manager.init(ui->tableWidget);
-    ui->tableWidget->resizeRowsToContents();
+
+    /*QString content = "abc";
+    QString key = "123";
+
+    QByteArray encoded = coder.encode(content.toUtf8(), key);
+    qDebug() << encoded;
+    QByteArray decoded = coder.decode(encoded, key);
+    qDebug() << decoded;*/
 }
 
 MainWindow::~MainWindow()
@@ -182,7 +189,6 @@ void MainWindow::on_actionWczytaj_triggered()
 
     QList<QTableWidgetItem*> rows = file_manager.readAllRows();
     ui->tableWidget->clearContents();
-    //while (ui->tableWidget->rowCount() > rows.count() / 3) ui->tableWidget->removeRow(ui->tableWidget->rowCount()-1);
     ui->tableWidget->setRowCount(rows.count()/3);
 
     manager.resetCursor();

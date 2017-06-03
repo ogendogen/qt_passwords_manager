@@ -10,6 +10,7 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include <stdexcept>
+#include "coder.h"
 
 class FileManager
 {
@@ -34,6 +35,7 @@ class FileManager
         QJsonArray logins;
         QJsonArray passwords;
         QJsonArray descriptions;
+        Coder coder = Coder::getInstance();
 };
 
 #endif // FILEMANAGER_H
