@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QDebug>
 #include <QMessageBox>
+#include <QFileDialog>
 #include "generatorwindow.h"
 #include "tablemanager.h"
 #include "filemanager.h"
@@ -42,6 +43,16 @@ private slots:
     void on_actionGenerator_hase_2_triggered();
 
     void on_pushButton_clicked();
+
+    void on_actionNowy_triggered();
+
+    void on_actionZako_cz_triggered();
+
+    void on_actionO_Autorze_triggered();
+
+    void on_actionWczytaj_triggered();
+
+    void on_actionZapisz_triggered();
 
 private:
     Ui::MainWindow *ui;

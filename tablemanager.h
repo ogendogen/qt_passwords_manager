@@ -18,11 +18,16 @@ class TableManager : public QObject
         void moveRowUp(int row);
         void moveRowDown(int row);
         bool isRow(QList<QTableWidgetItem*>);
+        void resetCursor();
+        void operator << (const QString text);
+        void operator >> (QString text);
 
     private:
         QTableWidget *table;
         bool initialized = false;
         int last_clicked = 0;
+        int write_cursor = 1;
+        int read_cursor = 1;
         void prepareRow(int row);
 };
 

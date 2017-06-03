@@ -8,7 +8,15 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     manager.init(ui->tableWidget);
 
-    FileManager manager("test.json");
+    try
+    {
+        FileManager file_manager("testtttttt.json");
+    }
+    catch(std::invalid_argument &e)
+    {
+        qDebug() << e.what();
+    }
+
 }
 
 MainWindow::~MainWindow()
@@ -132,4 +140,70 @@ void MainWindow::on_pushButton_clicked()
         }
         passwords_hidden = true;
     }
+}
+
+void MainWindow::on_actionNowy_triggered()
+{
+    int result = QMessageBox::warning(this, "Uwaga!", "Utworzenie nowego projektu zniszczy całą dotychczasową pracę! Czy kontynuować ?", QMessageBox::Yes | QMessageBox::No);
+    while (result != QMessageBox::Yes && result != QMessageBox::No) result = QMessageBox::warning(this, "Uwaga!", "Utworzenie nowego projektu zniszczy całą dotychczasową pracę! Czy kontynuować ?", QMessageBox::Yes | QMessageBox::No);
+    if (result == QMessageBox::No) return;
+    ui->tableWidget->clearContents();
+}
+
+void MainWindow::on_actionZako_cz_triggered()
+{
+    this->close();
+}
+
+void MainWindow::on_actionO_Autorze_triggered()
+{
+    QMessageBox::information(this, "Informacja o autorze", "Menadżer haseł napisany w C++/Qt\nAutor: Marcin K ISI1");
+}
+
+void MainWindow::on_actionWczytaj_triggered()
+{
+    QString filename = QFileDialog::getOpenFileName(this, "Wybierz plik do otwarcia...", QDir::currentPath(), "Json Files (*.json)");
+    qDebug() << filename;
+    if (filename.isEmpty()) return;
+
+    FileManager file_manager(filename);
+    if (!file_manager.isValid())
+    {
+        QMessageBox::critical(this, "Błąd!", "Plik nie zawiera prawidłowego obiektu JSON!");
+        return;
+    }
+
+    QList<QTableWidgetItem*> rows = file_manager.readAllRows();
+    ui->tableWidget->clearContents();
+
+    manager.resetCursor();
+    for (auto row : rows) manager << row->text();
+}
+
+void MainWindow::on_actionZapisz_triggered()
+{
+    QString filepath = QFileDialog::getSaveFileName(this, "Zapisz dane do pliku...", QDir::currentPath(), "Json Files (*.json)");
+    if (filepath.isEmpty()) return;
+
+    QStringList list = filepath.split("/");
+    QString filename = list.last();
+
+    FileManager file_manager(filename);
+    QList<QString> row;
+    int size = ui->tableWidget->rowCount() * ui->tableWidget->columnCount();
+    for (int i=1; i<=size; i++)
+    {
+        QString content;
+        manager >> content;
+        if (content.isEmpty()) break;
+
+        row << content;
+        if (row.count() == 3)
+        {
+            file_manager.saveRow(row);
+            row.clear();
+        }
+    }
+
+    //file_manager.saveToFile();
 }

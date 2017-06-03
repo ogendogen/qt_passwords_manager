@@ -85,3 +85,42 @@ void TableManager::prepareRow(int row)
     if (!initialized) return;
     for (int i=0; i<table->columnCount(); i++) table->setItem(row, i, new QTableWidgetItem());
 }
+
+void TableManager::resetCursor()
+{
+    write_cursor = 1;
+}
+
+void TableManager::operator <<(const QString text)
+{
+    int row = write_cursor / 3;
+    if (write_cursor % 3 == 0) row--;
+
+    int column = write_cursor % 3;
+    column--;
+    if (column < 0) column = 2;
+
+    qDebug() << "Row = " << row << " | Column = " << column;
+    table->setItem(row, column, new QTableWidgetItem(text));
+    write_cursor++;
+}
+
+void TableManager::operator >>(QString text)
+{
+    int row = read_cursor / 3;
+    if (read_cursor % 3 == 0) row--;
+
+    int column = read_cursor % 3;
+    column--;
+    if (column < 0) column = 2;
+
+    QTableWidgetItem *item = table->item(row, column);
+    qDebug() << item->text();
+    if (item == nullptr)
+    {
+        read_cursor = 1;
+        text = "";
+        return;
+    }
+    text = item->text();
+}

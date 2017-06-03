@@ -17,9 +17,12 @@ class FileManager
         FileManager();
         ~FileManager();
         FileManager(QString file_name);
-        bool saveRow(QList<QTableWidgetItem*> row);
+        bool saveRow(QList<QString> row);
         QList<QTableWidgetItem*> readAllRows();
+        void saveToFile();
+        void clearArrays();
         bool isValid();
+        bool setFileName(QString file_name);
 
         int countFiles();
         int countFilesInDir(QDir dir);
@@ -28,6 +31,9 @@ class FileManager
     private:
         QFile file;
         QJsonDocument document;
+        QJsonArray logins;
+        QJsonArray passwords;
+        QJsonArray descriptions;
 };
 
 #endif // FILEMANAGER_H

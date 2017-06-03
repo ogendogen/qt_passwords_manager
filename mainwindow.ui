@@ -180,7 +180,7 @@
     <property name="title">
      <string>Pomoc</string>
     </property>
-    <addaction name="actionGenerator_hase"/>
+    <addaction name="actionO_Autorze"/>
     <addaction name="actionGenerator_hase_2"/>
    </widget>
    <addaction name="menuBaza_hase"/>
@@ -215,7 +215,7 @@
     <string>Zakończ</string>
    </property>
   </action>
-  <action name="actionGenerator_hase">
+  <action name="actionO_Autorze">
    <property name="text">
     <string>O Autorze</string>
    </property>
