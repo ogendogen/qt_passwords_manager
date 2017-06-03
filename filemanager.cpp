@@ -5,11 +5,12 @@ FileManager::FileManager()
 
 }
 
-FileManager::FileManager(QString file_name, bool truncate)
+FileManager::FileManager(QString file_name, QString master_key, bool truncate)
 {
     file.setFileName(file_name);
     if (!file.open((truncate ? QIODevice::ReadWrite | QIODevice::Truncate : QIODevice::ReadWrite))) throw std::invalid_argument("can't open file");
-    document = QJsonDocument::fromJson(QString(file.readAll()).toUtf8());
+    this->master_key = master_key;
+    document = QJsonDocument::fromJson(coder.decode(QString(file.readAll()).toUtf8(), master_key));
 }
 
 FileManager::~FileManager()
@@ -67,7 +68,10 @@ void FileManager::saveToFile()
 
     QJsonDocument document_to_save(object);
     file.resize(0);
-    file.write(document_to_save.toJson(QJsonDocument::Compact));
+
+    QByteArray plain_json = document_to_save.toJson(QJsonDocument::Compact);
+    QByteArray coded_json = coder.encode(plain_json, master_key);
+    file.write(coded_json);
 }
 
 bool FileManager::setFileName(QString file_name)

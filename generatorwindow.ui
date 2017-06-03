@@ -9,7 +9,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>320</width>
+    <width>318</width>
     <height>196</height>
    </rect>
   </property>
@@ -83,13 +83,6 @@
        </property>
       </widget>
      </item>
-     <item row="1" column="0">
-      <widget class="QRadioButton" name="radioButton">
-       <property name="text">
-        <string>Krótkie</string>
-       </property>
-      </widget>
-     </item>
      <item row="2" column="0">
       <widget class="QRadioButton" name="radioButton_2">
        <property name="text">
@@ -97,6 +90,13 @@
        </property>
        <property name="checked">
         <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QRadioButton" name="radioButton">
+       <property name="text">
+        <string>Krótkie</string>
        </property>
       </widget>
      </item>

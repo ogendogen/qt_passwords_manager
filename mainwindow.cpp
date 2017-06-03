@@ -180,7 +180,14 @@ void MainWindow::on_actionWczytaj_triggered()
     qDebug() << filename;
     if (filename.isEmpty()) return;
 
-    FileManager file_manager(filename);
+    QString master_key = QInputDialog::getText(this, "Klucz", "Podaj klucz główny");
+    if (master_key.isEmpty())
+    {
+        QMessageBox::critical(this, "Błąd!", "Klucz główny nie może być pusty!\nSpróbuj ponownie!");
+        return;
+    }
+
+    FileManager file_manager(filename, master_key);
     if (!file_manager.isValid())
     {
         QMessageBox::critical(this, "Błąd!", "Plik nie zawiera prawidłowego obiektu JSON!");
@@ -205,7 +212,14 @@ void MainWindow::on_actionZapisz_triggered()
     QStringList list = filepath.split("/");
     QString filename = list.last();
 
-    FileManager file_manager(filename);
+    QString master_key = QInputDialog::getText(this, "Klucz", "Podaj klucz główny");
+    if (master_key.isEmpty())
+    {
+        QMessageBox::critical(this, "Błąd!", "Klucz główny nie może być pusty !\nSpróbuj ponownie!");
+        return;
+    }
+
+    FileManager file_manager(filename, master_key);
     QList<QString> row;
     for (int i=0; i<ui->tableWidget->rowCount(); i++)
     {
@@ -214,6 +228,7 @@ void MainWindow::on_actionZapisz_triggered()
         file_manager.saveRow(row);
         row.clear();
     }
+
     file_manager.saveToFile();
 }
 

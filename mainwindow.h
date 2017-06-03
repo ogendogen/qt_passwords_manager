@@ -5,6 +5,7 @@
 #include <QDebug>
 #include <QMessageBox>
 #include <QFileDialog>
+#include <QInputDialog>
 #include "generatorwindow.h"
 #include "tablemanager.h"
 #include "filemanager.h"

@@ -17,7 +17,7 @@ class FileManager
     public:
         FileManager();
         ~FileManager();
-        FileManager(QString file_name, bool truncate=false);
+        FileManager(QString file_name, QString master_key, bool truncate=false);
         bool saveRow(QList<QString> row);
         QList<QTableWidgetItem*> readAllRows();
         void saveToFile();
@@ -35,6 +35,7 @@ class FileManager
         QJsonArray logins;
         QJsonArray passwords;
         QJsonArray descriptions;
+        QString master_key;
         Coder coder = Coder::getInstance();
 };
 
