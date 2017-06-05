@@ -154,6 +154,7 @@ void MainWindow::on_actionNowy_triggered()
     if (result == QMessageBox::No) return;
     ui->tableWidget->setRowCount(10);
     ui->tableWidget->clearContents();
+    ui->tableWidget->resizeRowsToContents();
 }
 
 void MainWindow::on_actionZako_cz_triggered()
