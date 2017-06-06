@@ -25,10 +25,6 @@ class FileManager
         bool isValid();
         bool setFileName(QString file_name);
 
-        int countFiles();
-        int countFilesInDir(QDir dir);
-        QList<QFile> readAllFiles();
-
     private:
         QFile file;
         QJsonDocument document;

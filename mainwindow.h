@@ -6,6 +6,7 @@
 #include <QMessageBox>
 #include <QFileDialog>
 #include <QInputDialog>
+#include <QCloseEvent>
 #include "generatorwindow.h"
 #include "tablemanager.h"
 #include "filemanager.h"
@@ -57,6 +58,7 @@ private slots:
 
 protected:
     void keyReleaseEvent(QKeyEvent *event);
+    void closeEvent(QCloseEvent *event);
 
 
 private:

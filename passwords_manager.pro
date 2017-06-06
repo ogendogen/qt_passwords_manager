@@ -46,3 +46,5 @@ FORMS    += mainwindow.ui \
 DISTFILES +=
 
 RESOURCES +=
+
+STATECHARTS +=

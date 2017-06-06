@@ -97,11 +97,25 @@ void MainWindow::on_pushButton_5_released()
 void MainWindow::on_pushButton_6_clicked()
 {
     // usunięcie zaznaczonej opcji
+    if (ui->tableWidget->rowCount() == 1)
+    {
+        QMessageBox::critical(this, "Błąd!", "Nie możesz usunąć ostatniego wiersza!");
+        return;
+    }
     QList<QTableWidgetItem*> items = ui->tableWidget->selectedItems();
     if (!manager.isRow(items))
     {
         QMessageBox::warning(this, "Uwaga!", "Możesz tylko usuwać wiersz!");
         return;
+    }
+    for (auto item : items)
+    {
+        if (!item->text().isEmpty())
+        {
+            int result = QMessageBox::warning(this, "Uwaga!", "Próbujesz usunąć bezpowrotnie wiersz zawierający treści! Czy kontynuować ?", QMessageBox::Yes | QMessageBox::No);
+            if (result == QMessageBox::Yes) break;
+            return;
+        }
     }
     manager.deleteRow(items[0]->row());
     ui->tableWidget->resizeRowsToContents();
@@ -154,7 +168,7 @@ void MainWindow::on_actionNowy_triggered()
     if (result == QMessageBox::No) return;
     ui->tableWidget->setRowCount(10);
     ui->tableWidget->clearContents();
-    ui->tableWidget->resizeRowsToContents();
+    manager.init(ui->tableWidget);
 }
 
 void MainWindow::on_actionZako_cz_triggered()
@@ -183,7 +197,7 @@ void MainWindow::on_actionWczytaj_triggered()
     FileManager file_manager(filename, master_key);
     if (!file_manager.isValid())
     {
-        QMessageBox::critical(this, "Błąd!", "Plik nie zawiera prawidłowego obiektu JSON!");
+        QMessageBox::critical(this, "Błąd!", "Plik nie zawiera prawidłowego obiektu JSON!\nPodałeś złe hasło!");
         return;
     }
 
@@ -231,6 +245,13 @@ void MainWindow::keyReleaseEvent(QKeyEvent *event)
     {
         QList<QTableWidgetItem*> selected_items = ui->tableWidget->selectedItems();
         if (selected_items.isEmpty()) return;
-        for (auto &&item : selected_items) item->setText("");
+        for (auto &item : selected_items) item->setText("");
     }
+}
+
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    int result = QMessageBox::question(this, "Uwaga!", "Czy na pewno chcesz zakończyć pracę ?", QMessageBox::Yes | QMessageBox::No);
+    if (result == QMessageBox::Yes) event->accept();
+    else event->ignore();
 }
